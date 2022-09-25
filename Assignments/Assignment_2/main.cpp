@@ -1,7 +1,20 @@
+/*
+  Name: Henok Tilahun, 5007740928, 1021, Assignment 2
+  Description: Displays UNLV Zoo along with other information based on
+  user's input
+  Input: month, number of zebras, number of rabbits
+  Output: UNLV Zoo logo along with calculations that are based on the
+  user's input
+*/
 #include <iostream>
 #include <cmath>
 #include <iomanip>
-
+/*
+  FUNCTION_IDENTIFIER: Displays the UNLV Logo along with a welcome 
+  banner
+  parameters: N/A
+  return value: Void returns nothing
+*/
 void display_UNLV()
 {
     //display the UNLV Zoo Logo
@@ -31,12 +44,15 @@ void display_UNLV()
     std::cout << "*****************************************************************************\n";
     std::cout << "\n";
 }
-
-
+/*
+  FUNCTION_IDENTIFIER: Lets the Operating System run this program.
+  parameters: N/A
+  return value: returns 0
+*/
 int main()
 {
     //display the heading code from above
-    //display_UNLV();
+    display_UNLV();
 
     //initalize global const
     const double LITTLE_ZEBRA = 5; //food baby zebra needs
@@ -90,7 +106,7 @@ int main()
     std::cout << "For Rabbits, total food/day in " << num_of_month << " months is: " << total_food_rabbit << "\n";
     std::cout << "Overall, total food/day in " << num_of_month << "months is: " << total_food << "\n";
 
-  
+    //display the tickets
     std::cout << std::setfill(' ') << std::fixed << std::setprecision(2);
     std::cout << "\n/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\\n";
     std::cout << "|                                      |\n";
@@ -101,19 +117,21 @@ int main()
     std::cout << "|            (702) 895-3011            |\n";
     std::cout << "|" << std::setw(40) << "|\n";
     std::cout << "|" << std::setw(40) << "|\n";
-    std::cout << "| " << "Baby Zebra(lbs/d):" << std::setw(19) << LITTLE_ZEBRA << "|\n";
-    std::cout << "| " << "Growth Rate(month):" << std::setw(18) << GROWTH_RATE_ZEBRA << "|\n";
-    std::cout << "| " << "Baby Rabbit(lbs/d):" << std::setw(18) << LITTLE_RABBIT << "|\n";
-    std::cout << "| " << "Growth Rate(month):" << std::setw(18) << GROWTH_RATE_RABBIT << "|\n";
+    std::cout << "| " << "Baby Zebra(lbs/d):" << std::setw(18) << LITTLE_ZEBRA << " |\n";
+    std::cout << "| " << "Growth Rate(month):" << std::setw(17) << GROWTH_RATE_ZEBRA << " |\n";
+    std::cout << "| " << "Baby Rabbit(lbs/d):" << std::setw(17) << LITTLE_RABBIT << " |\n";
+    std::cout << "| " << "Growth Rate(month):" << std::setw(17) << GROWTH_RATE_RABBIT << " |\n";
     std::cout << "|" << std::setw(40) << "|\n";
-    std::cout << "| " << "Growth Month:" << std::setw(24) << num_of_month << "|\n";
-    std::cout << "| " << "Grown Zebra(lbs/d):" << std::setw(18) << updated_zebra << "|\n";
-    std::cout << "| " << "Grown Rabbit(lbs/d):" << std::setw(17) << updated_rabbit << "|\n";
+    std::cout << "| " << "Growth Month:" << std::setw(23) << num_of_month << " |\n";
+    std::cout << "| " << "Grown Zebra(lbs/d):" << std::setw(17) << updated_zebra << " |\n";
+    std::cout << "| " << "Grown Rabbit(lbs/d):" << std::setw(16) << updated_rabbit << " |\n";
     std::cout << "|" << std::setw(40) << "|\n";
-    std::cout << "| " << "Zebra amount:" << std::setw(24) << num_of_zebra << "|\n";
-    std::cout << "| " << "Rabbit amount:" << std::setw(23) << num_of_rabbit << "|\n";
-    std::cout << "| " << "Total Food(lbs/d):" << std::setfill('*') << std::setw(19) << total_food << "|\n";
-    std::cout << "\n/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\\n";
+    std::cout << "| " << "Zebra amount:" << std::setw(23) << num_of_zebra << " |\n";
+    std::cout << "| " << "Rabbit amount:" << std::setw(22) << num_of_rabbit << " |\n";
+    std::cout << "| " << "Total Food(lbs/d):" << std::setfill('*') << std::setw(18) << total_food << " |\n";
+    std::cout << std::setfill(' ');
+    std::cout << "|" << std::setw(40) << "|\n";
+    std::cout << "\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\\/\n";
 
-  return 0;
+    return 0;
 }
