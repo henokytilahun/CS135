@@ -76,7 +76,24 @@ int main(){
 
     //ask user for height
     std::cout << "Enter height in inches:\n";
-    std::cin >> weight;
+
+    do
+    {
+      if(std::cin.fail())
+      {
+        std::cout << "Invalid height!\n";
+        std::cin.clear();
+        std::cin.ignore(100,'\n');
+      } else if(height < 40 || height > 90)
+      {
+        std::cout << "Heigh must be between 40\" and 90\"!\n";
+        std::cin.clear();
+        std::cin.ignore(100,'\n');
+      }
+      std::cin >> height;
+    } while (std::cin.fail() || height < 40 || height > 90);
+
+
 
 
 
