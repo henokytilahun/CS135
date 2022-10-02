@@ -115,7 +115,7 @@ int main()
     }
     else if (sex == 'F' || sex == 'f')
     {
-        BMR = 665 + (4.3 * weight) + (4.3 * height) - (4.7 * age);
+        BMR = 655 + (4.3 * weight) + (4.3 * height) - (4.7 * age);
     }
 
     // activity Level
