@@ -1,17 +1,24 @@
 /*
-Name: Henok Tilahun, 5007740928, 1021, Assignment 3
-Description: Takes age, weight, height, gender,
-and activity level into account to create an accurate BMR
-and then an AMR to display the amount of calories needed to 
-maintain weight, lose weight, and gain weight
-Input: age, weight, height, gender, activity level
-Output: Text (general feedback/directions), numbers about
-how to maintain, gain, and lose weight
+    Name: Henok Tilahun, 5007740928, 1021, Assignment 3
+    Description: Takes age, weight, height, gender,
+    and activity level into account to create an accurate BMR
+    and then an AMR to display the amount of calories needed to
+    maintain weight, lose weight, and gain weight
+    Input: age, weight, height, gender, activity level
+    Output: Text (general feedback/directions), numbers about
+    how to maintain, gain, and lose weight
 */
+//Libraries that the program needs to run
 #include <iostream>
 #include <cmath>
+//declaration that namespace is being used
 using namespace std;
-
+/*
+  FUNCTION_IDENTIFIER: Displays the Calorie Calculator logo along with
+  a quick message saying Welcome to the app 
+  parameters: N/A
+  return value: Void returns nothing
+*/
 void heart_display()
 {
     cout << endl
@@ -33,20 +40,24 @@ void heart_display()
          << endl
          << "             Welcome to the Calorie Calculator App\n";
 }
-
+/*
+  FUNCTION_IDENTIFIER: Lets the Operating System run this program.
+  parameters: N/A
+  return value: returns 0
+*/
 int main()
 {
 
     // initalize global variables
-    int age = 10;
-    int weight = 50;
-    int height = 40;
-    char sex = 'M';
-    int act_lvl = 0;
-    double BMR = 0.0;
-    double AMR = 0.0;
-    double lose_w = 0.0;
-    double gain_w = 0.0;
+    int age = 10; //holds age
+    int weight = 50; //holds weight
+    int height = 40; //holds height
+    char sex = 'M'; //holds gender
+    int act_lvl = 0; //holds activity level
+    double BMR = 0.0; //holds BMR
+    double AMR = 0.0; //holds AMR
+    double lose_w = 0.0; //holds Calories for weight loss
+    double gain_w = 0.0; //holds Calories for weight gain
 
     // call heart display function
     heart_display();
