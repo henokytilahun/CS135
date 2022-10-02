@@ -8,35 +8,50 @@
     Output: Text (general feedback/directions), numbers about
     how to maintain, gain, and lose weight
 */
-//Libraries that the program needs to run
+// Libraries that the program needs to run
 #include <iostream>
 #include <cmath>
-//declaration that namespace is being used
+// declaration that namespace is being used
 using namespace std;
 /*
   FUNCTION_IDENTIFIER: Displays the Calorie Calculator logo along with
-  a quick message saying Welcome to the app 
+  a quick message saying Welcome to the app
   parameters: N/A
   return value: Void returns nothing
 */
 void heart_display()
 {
     cout << endl
-         << ".@  @, (&           .(%(.               *#(,              .   \n"
-         << "(@  @( &@      .@@@@@@@@@@@@@#     @@@@@@@@@@@@@#        @@@. \n"
-         << "(@  @( &@    /@@@@@@@@@@@@@@@@@@&@@@@@@@@@@@@@@@@@@    .@@@@@,\n"
-         << "(@@@@@@@@   @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@   .@@@@@,\n"
-         << "(@@@@@@@@   @@@@@@@@@@@@@@@@  .@@@@@@@@@@@@@@@@@@@@@(  .@@@@@,\n"
-         << " @@@@@@@#   @@@@@@@@@@@@@@      @@@@@@@@@@@@@@@@@@@@/  .@@@@@,\n"
-         << "    @@.     &@@@@@@@@@@@.   @@   @@@@@@@@@@@@@@@@@@@   .@@@@@,\n"
-         << "    @@.                   @@@@@   @@@@                 .@@@@@,\n"
-         << "    @@.       #@@@@@@@@@@@@@@@@@   &#  .@@@@@@@@@@     .@@@@@,\n"
-         << "    @@.         @@@@@@@@@@@@@@@@@.    %@@@@@@@@@#         ,@@,\n"
-         << "    @@.           @@@@@@@@@@@@@@@@,  @@@@@@@@@%           ,@@.\n"
-         << "    @@.             %@@@@@@@@@@@@@@@@@@@@@@@.             ,@@,\n"
-         << "    @@.                %@@@@@@@@@@@@@@@@@,                ,@@,\n"
-         << "    @@.                    &@@@@@@@@@,                    ,@@,\n"
-         << "    @@.                     &@@@@@,                       ,@@,\n"
+         << ".@  @, (&           .(%(.               *#(,       "
+         << "       .   \n"
+         << "(@  @( &@      .@@@@@@@@@@@@@#     @@@@@@@@@@@@@#   "
+         << "     @@@. \n"
+         << "(@  @( &@    /@@@@@@@@@@@@@@@@@@&@@@@@@@@@@@@@@@@@@  "
+         << "  .@@@@@,\n"
+         << "(@@@@@@@@   @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@  "
+         << " .@@@@@,\n"
+         << "(@@@@@@@@   @@@@@@@@@@@@@@@@  .@@@@@@@@@@@@@@@@@@@@@( "
+         << " .@@@@@,\n"
+         << " @@@@@@@#   @@@@@@@@@@@@@@      @@@@@@@@@@@@@@@@@@@@/ "
+         << " .@@@@@,\n"
+         << "    @@.     &@@@@@@@@@@@.   @@   @@@@@@@@@@@@@@@@@@@   "
+         << ".@@@@@,\n"
+         << "    @@.                   @@@@@   @@@@                 "
+         << ".@@@@@,\n"
+         << "    @@.       #@@@@@@@@@@@@@@@@@   &#  .@@@@@@@@@@     "
+         << ".@@@@@,\n"
+         << "    @@.         @@@@@@@@@@@@@@@@@.    %@@@@@@@@@#       "
+         << "  ,@@,\n"
+         << "    @@.           @@@@@@@@@@@@@@@@,  @@@@@@@@@%         "
+         << "  ,@@.\n"
+         << "    @@.             %@@@@@@@@@@@@@@@@@@@@@@@.         "
+         << "    ,@@,\n"
+         << "    @@.                %@@@@@@@@@@@@@@@@@,             "
+         << "   ,@@,\n"
+         << "    @@.                    &@@@@@@@@@,             "
+         << "       ,@@,\n"
+         << "    @@.                     &@@@@@,                  "
+         << "     ,@@,\n"
          << endl
          << "             Welcome to the Calorie Calculator App\n";
 }
@@ -49,15 +64,15 @@ int main()
 {
 
     // initalize global variables
-    int age = 10; //holds age
-    int weight = 50; //holds weight
-    int height = 40; //holds height
-    char sex = 'M'; //holds gender
-    int act_lvl = 0; //holds activity level
-    double BMR = 0.0; //holds BMR
-    double AMR = 0.0; //holds AMR
-    double lose_w = 0.0; //holds Calories for weight loss
-    double gain_w = 0.0; //holds Calories for weight gain
+    int age = 10;        // holds age
+    int weight = 50;     // holds weight
+    int height = 40;     // holds height
+    char sex = 'M';      // holds gender
+    int act_lvl = 0;     // holds activity level
+    double BMR = 0.0;    // holds BMR
+    double AMR = 0.0;    // holds AMR
+    double lose_w = 0.0; // holds Calories for weight loss
+    double gain_w = 0.0; // holds Calories for weight gain
 
     // call heart display function
     heart_display();
@@ -65,12 +80,14 @@ int main()
     // ask user for age
     cout << "To get started, enter your age in years:\n";
     cin >> age;
+
+    // validate input
     if (cin.fail())
     {
         cout << "Invalid Age!\n";
         return 0;
     }
-    else if (age < 10 || age > 79)
+    if (age < 10 || age > 79)
     {
         cout << "Age must be between 10 and 79 years!\n";
         return 0;
@@ -79,12 +96,14 @@ int main()
     // ask user for weight
     cout << "Enter weight in lbs:\n";
     cin >> weight;
+
+    // validate input
     if (cin.fail())
     {
         cout << "Invalid weight!\n";
         return 0;
     }
-    else if (weight < 50 || weight > 400)
+    if (weight < 50 || weight > 400)
     {
         cout << "Weight must be between 50 lbs and 400 lbs!\n";
         return 0;
@@ -94,12 +113,13 @@ int main()
     cout << "Enter height in inches:\n";
     cin >> height;
 
+    // validate input
     if (cin.fail())
     {
         cout << "Invalid height!\n";
         return 0;
     }
-    else if (height < 40 || height > 90)
+    if (height < 40 || height > 90)
     {
         cout << "Heigh must be between 40\" and 90\"!\n";
         return 0;
@@ -109,6 +129,7 @@ int main()
     cout << "Enter 'M' for male or 'F' for female:\n";
     cin >> sex;
 
+    // look for the proper sex
     switch (sex)
     {
     case 'M':
@@ -146,6 +167,8 @@ int main()
          << "4. Active: Exercising 6 - 7 days/week\n"
          << "5. Very active: Exercising hard 6 - 7 days/week\n";
     cin >> act_lvl;
+
+    // looks for the correct numbers
     switch (act_lvl)
     {
     case 1:
@@ -172,6 +195,7 @@ int main()
     lose_w = AMR - (AMR * .2);
     gain_w = (AMR * .2) + AMR;
 
+    // display calculated calories
     cout << "To maintain your current weight, you need to consume an"
          << " average of " << round(AMR) << " calories/day.\n";
     cout << "To lose weight, you need to consume an average of "
