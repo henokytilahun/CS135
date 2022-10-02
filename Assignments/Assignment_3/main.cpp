@@ -2,6 +2,7 @@
 Place your header comment here
 */
 #include <iostream>
+#include <cmath>
 using namespace std;
 
 void heart_display()
@@ -35,6 +36,11 @@ int main()
     int height = 40;
     char sex = 'M';
     int act_lvl = 0;
+    double BMR = 0.0;
+    double AMR = 0.0;
+
+    //call heart display function
+    heart_display();
 
     // ask user for age
     cout << "To get started, enter your age in years:\n";
@@ -83,26 +89,66 @@ int main()
     cout << "Enter 'M' for male or 'F' for female:\n";
     cin >> sex;
 
-    switch(sex)
+    switch (sex)
     {
-        case 'M':
-            sex = 'M';
-            break;
-        case 'm':
-            sex = 'm';
-            break;
-        case 'F':
-            sex = 'F';
-            break;
-        case 'f':
-            sex = 'f';
-            break;
-        default:
-            cout << "Invalid entry!";
-            return 0;
+    case 'M':
+        sex = 'M';
+        break;
+    case 'm':
+        sex = 'm';
+        break;
+    case 'F':
+        sex = 'F';
+        break;
+    case 'f':
+        sex = 'f';
+        break;
+    default:
+        cout << "Invalid entry!";
+        return 0;
     }
 
-    
+    // calculate BMR
+    if (sex == 'M' || sex == 'm')
+    {
+        BMR = 65 + (6.2 * weight) + (12.7 * height) - (6.8 * age);
+    }
+    else if (sex == 'F' || sex == 'f')
+    {
+        BMR = 665 + (4.3 * weight) + (4.3 * height) - (4.7 * age);
+    }
+
+    // activity Level
+    cout << "Select activity level:\n"
+    << "1. Inactive: little to no exercise.\n"
+    << "2. Lightly active: Exercising 1 - 3 days/week\n"
+    << "3. Moderately active: Exercising 3 - 5 days/week\n"
+    << "4. Active: Exercising 6 - 7 days/week\n"
+    << "5. Very active: Exercising hard 6 - 7 days/week\n";
+    cin >> act_lvl;
+    switch (act_lvl)
+    {
+    case 1:
+        AMR = BMR * 1.2;
+        cout << AMR;
+        break;
+    case 2:
+        AMR = BMR * 1.375;
+        break;
+    case 3:
+        AMR = BMR * 1.55;
+        cout << round(AMR);
+        break;
+    case 4:
+        AMR = BMR * 1.725;
+        break;
+    case 5:
+        AMR = BMR * 1.9;
+        break;
+    default:
+        cout << "Invalid activity level!";
+        return 0;
+    }
 
     return 0;
 }
