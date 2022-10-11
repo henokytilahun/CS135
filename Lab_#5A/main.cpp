@@ -27,6 +27,9 @@ int main()
             if(i = 0 || i == num_of_stars - 1)
             {
                 std::cout << "*";
+            } else if (i == num_of_stars)
+            {
+                std::cout << "\n*";
             }
         }
         std::cout << "\n*";
