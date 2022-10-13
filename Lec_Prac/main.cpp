@@ -1,14 +1,25 @@
 #include <fstream>
+#include <iostream>
 
-int main ()
+int main()
 {
-    //1.create an ofstream object
+    std::cout << "Please enter a filename:\n";
+    std::string filename;
+    std::getline(std::cin, filename);
+
     std::ofstream writer;
-    //2.open or create a file
-    writer.open("out.txt", std::fstream::app);
-    //3.write to the file
-    writer << "Hello World\n";
-    //4.close the file
+    writer.open(filename.c_str(), std::fstream::app);
+    std::string line;
+
+    do
+    {
+        std::cout << "Enter a line of text:\n";
+        std::getline(std::cin, line);
+        if (line != "done")
+        {
+            writer << line << std::endl;
+        }
+    } while (line != "done");
     writer.close();
 
     return 0;
