@@ -6,18 +6,18 @@ int main()
 
     std::ifstream reader;
 
-    reader.open("in2.txt");
-    int x;
+    reader.open("in3.txt");
+    int x,y;
     while (!reader.eof())
     {
-        reader >> x;
+        reader >> x >> y;
         if (reader.fail())
         {
             reader.clear();
             reader.ignore(100, '\n');
         } else
         {
-            std::cout << x << std::endl;
+            std::cout << x << '\t' << y << std::endl;
         }
     }
 
