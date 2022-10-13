@@ -1,0 +1,6 @@
+C++ can be used to read files.
+It requires including fstream
+Then you need to create an if stream object
+The object is then used to open a file
+You can then use a loop to read the file
+Remember, you can use fstream objects as you use can and cout. 
