@@ -3,35 +3,24 @@
 
 int main()
 {
-    // 1.create an ifstream object
-    std::ifstream reader;
-    // 2.Open a file
-    reader.open("in1.txt");
-    // 2.1 Optionally, check if file was opened
-    if(!reader)
-    {
-        std::cout << "error, opening file!\n";
-        return 0;
-    }
-    // 3.read the file
-    std::string line;
-    // Not a step
-    /*
-    while(std::getline(reader, line))
-    {
-        std::cout << line << std::endl;
-    }
-    */
 
-    //other way to read full file. This one can lead to infinite loop
+    std::ifstream reader;
+
+    reader.open("in2.txt");
+    int x;
     while (!reader.eof())
     {
-        std::getline(reader, line);
-        std::cout << line << std::endl;        
+        reader >> x;
+        if (reader.fail())
+        {
+            reader.clear();
+            reader.ignore(100, '\n');
+        } else
+        {
+            std::cout << x << std::endl;
+        }
     }
-    
 
-        // 4.close the file
-        reader.close();
+    reader.close();
     return 0;
 }
