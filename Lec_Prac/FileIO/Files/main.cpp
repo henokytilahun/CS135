@@ -17,7 +17,7 @@ int main()
             reader.ignore(100, '\n');
         } else
         {
-            std::cout << x << '\t' << y << std::endl;
+            std::cout << x*y << std::endl;
         }
     }
 
