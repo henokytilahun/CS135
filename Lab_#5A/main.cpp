@@ -13,7 +13,7 @@ int main()
         if (std::cin.fail() || num_of_stars > 20 || num_of_stars < 2)
         {
             std::cout << "Error: Invalid entry, please retry\n"
-            << "Enter a count between 2 and 20\n**"; 
+                      << "Enter a count between 2 and 20\n**";
             std::cin.clear();
             std::cin.ignore(100, '\n');
         }
@@ -22,17 +22,21 @@ int main()
 
     for (int i = 0; i < num_of_stars; i++)
     {
-        for (int j = 0; j < num_of_stars; j++)
+        for (int j = i ; j < num_of_stars; j++)
         {
-            if(i = 0 || i == num_of_stars - 1)
-            {
-                std::cout << "*";
-            } else if (i == num_of_stars)
-            {
-                std::cout << "\n*";
-            }
+            std::cout << "*";
         }
-        std::cout << "\n*";
+        std::cout << "\n";
     }
+
+    for (int i = 0; i < num_of_stars; i++)
+    {
+        for (int j = 0; j <= i; j++)
+        {
+            std::cout << "*";
+        }
+        std::cout << "\n";
+    }
+
     return 0;
 }
