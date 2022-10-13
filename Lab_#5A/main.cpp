@@ -1,19 +1,30 @@
+/*
+  Name: Henok Tilahun, 5007740928, 1021, Lab 5A
+  Description: Takes user input then prints out stars in increaseing
+  then decreasing order while the user input is between 2 and 20.
+  Input: number between 2 and 20
+  Output: Stars aranged in half-hourglass shape
+*/
 #include <iostream>
-
+/*
+  FUNCTION_IDENTIFIER: Lets the Operating System run this program.
+  parameters: N/A
+  return value: returns 0
+*/
 int main()
 {
 
     // initalize global variables
     int num_of_stars = 20;
 
-    std::cout << "Enter a count between 2 and 20\n**";
+    std::cout << "Enter a count between 2 and 20\n**\n";
     // start do-while loop (check for input error)
     do
     {
         if (std::cin.fail() || num_of_stars > 20 || num_of_stars < 2)
         {
             std::cout << "Error: Invalid entry, please retry\n"
-                      << "Enter a count between 2 and 20\n**";
+                      << "Enter a count between 2 and 20\n**\n";
             std::cin.clear();
             std::cin.ignore(100, '\n');
         }
