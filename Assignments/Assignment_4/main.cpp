@@ -26,25 +26,27 @@ int main()
     bool play_turn = true; // bool
     char play_again = ' ';
 
-    std::cout << "The game of Num.  The player to remove the last "
+    std::cout << "The game of Nim.  The player to remove the last "
               << "match loses.\n\n";
-    std::cout << "Would you like to go first? (Y/N): ";
-
-    std::cin >> g_f;
-    g_f = toupper(g_f);
 
     do
     {
-        int matches = 21; //int   
+        int matches = 21; // int
+
+        std::cout << "Would you like to go first? (Y/N): ";
+
+        std::cin >> g_f;
+        g_f = toupper(g_f);
+
         do // do while loop
         {
             while (g_f != 'Y' && g_f != 'N') // while loop
             {
                 if (g_f != 'Y' && g_f != 'N') // if statement
                 {
-                    std::cout << "Please, answer Y or N.\n";
+                    std::cout << "\nPlease, answer Y or N.\n";
                     std::cout << "\nWould you like to go first? "
-                    << "(Y/N):";
+                              << "(Y/N):";
                     std::cin.clear();
                     std::cin.ignore(100, '\n');
                 }
@@ -56,9 +58,13 @@ int main()
             {
                 std::cout << "\nPlayer Turn - Matches: "; // displays to screen
 
-                for (int i = 1; i <= matches + 1; i++) // for loop
+                for (int i = 1; i <= matches; i++) // for loop
                 {
-                    if (i == 1) // begining of painful if statemetns
+                    if (i == 0) // begining of painful if statemetns
+                    {
+                        std::cout << d_m;
+                    }
+                    else if (i == 1) // else if
                     {
                         std::cout << d_m;
                     }
@@ -138,7 +144,7 @@ int main()
                     {
                         std::cout << d_m << " ";
                     }
-                    else if (i == 21) // else if
+                    else if (i == 21)
                     {
                         std::cout << d_m;
                     }
@@ -158,33 +164,41 @@ int main()
                 {
                     if (std::cin.fail()) // if statement
                     {
-                        std::cout << "Please, type 1, 2, or 3 as your "
+                        std::cout << "\nPlease, type 1, 2, or 3 as your "
                                   << "response.\n";
+                        std::cout << "\n\nRemove (1 - 3): ";
                         std::cin.clear();
                         std::cin.ignore(100, '\n');
                     }
                     else if (play_move < 1) // else if
                     {
-                        std::cout << "Must remove at least one match.\n";
+                        std::cout << "\nMust remove at least one match.\n";
+                        std::cout << "\n\nRemove (1 - 3): ";
                         std::cin.clear();
                         std::cin.ignore(100, '\n');
                     }
                     else if (play_move > 3) // else if
                     {
-                        std::cout << "Cannot remove more than three "
-                                  << "matches.";
+                        std::cout << "\nCannot remove more than three "
+                                  << "matches.\n";
+                        std::cout << "\n\nRemove (1 - 3): ";
                         std::cin.clear();
                         std::cin.ignore(100, '\n');
                     } // else if
                     std::cin >> play_move;
                 }
-                matches -= play_move; // player taking away from matches
 
-                std::cout << "Computer Turn - Matches: ";
+                matches = matches - play_move; // player taking away from matches
 
-                for (int i = 1; i <= matches + 1; i++) // for loop
+                std::cout << "\nComputer Turn - Matches: ";
+
+                for (int i = 1; i <= matches; i++) // for loop
                 {
-                    if (i == 1) // else if
+                    if (i == 0) // begining of painful if statemetns
+                    {
+                        std::cout << d_m;
+                    }
+                    else if (i == 1) // else if
                     {
                         std::cout << d_m;
                     }
@@ -264,27 +278,47 @@ int main()
                     {
                         std::cout << d_m << " ";
                     }
-                    else if (i == 21) // else if
+                    else if (i == 21)
                     {
                         std::cout << d_m;
                     }
                 }
+
                 comp_move = matches % 4;
+
                 if (comp_move == 0)
                 {
                     comp_move = 3;
+                } else if (comp_move == 1)
+                {
+                    comp_move = 1;
+                } else if (comp_move == 2)
+                {
+                    comp_move = 1;
+                } else if(comp_move == 3)
+                {
+                    comp_move = 2;
                 }
 
                 matches -= comp_move;
-                std::cout << "\n\nComputer removes " << comp_move << ".\n";
+                std::cout << "\n\nComputer removes " << comp_move << ".\n\n";
+
+                if (matches < 1)
+                {
+                    std::cout << "Game Over - Computer wins.\n\n";
+                }
             }
             else
             {
-                std::cout << "Computer Turn - Matches: ";
+                std::cout << "\nComputer Turn - Matches: ";
 
-                for (int i = 1; i <= matches + 1; i++)
+                for (int i = 1; i <= matches; i++)
                 {
-                    if (i == 1) // else if
+                    if (i == 0) // begining of painful if statemetns
+                    {
+                        std::cout << d_m;
+                    }
+                    else if (i == 1) // else if
                     {
                         std::cout << d_m;
                     }
@@ -364,7 +398,7 @@ int main()
                     {
                         std::cout << d_m << " ";
                     }
-                    else if (i == 21) // else if
+                    else if (i == 21)
                     {
                         std::cout << d_m;
                     }
@@ -377,11 +411,16 @@ int main()
 
                 matches -= comp_move;
                 std::cout << "\n\nComputer removes " << comp_move << ".\n";
+
                 std::cout << "\nPlayer Turn - Matches: ";
 
-                for (int i = 1; i <= matches + 1; i++)
+                for (int i = 1; i <= matches; i++)
                 {
-                    if (i == 1) // else if
+                    if (i == 0) // begining of painful if statemetns
+                    {
+                        std::cout << d_m;
+                    }
+                    else if (i == 1) // else if
                     {
                         std::cout << d_m;
                     }
@@ -397,7 +436,7 @@ int main()
                     {
                         std::cout << d_m;
                     }
-                    else if (i == 5)
+                    else if (i == 5) // else if
                     {
                         std::cout << d_m << " ";
                     }
@@ -461,18 +500,18 @@ int main()
                     {
                         std::cout << d_m << " ";
                     }
-                    else if (i == 21) // else if
+                    else if (i == 21)
                     {
                         std::cout << d_m;
                     }
                 }
                 if (matches < 1) // if statement
                 {
-                    std::cout << "\nGame Over - Computer wins.";
+                    std::cout << "\n\nGame Over - Computer wins.\n\n";
                 }
                 else // else
                 {
-                    std::cout << "\nRemove (1 - 3): ";
+                    std::cout << "\n\nRemove (1 - 3): ";
                     std::cin >> play_move;
                 }
 
@@ -480,21 +519,24 @@ int main()
                 {
                     if (std::cin.fail()) // if statement
                     {
-                        std::cout << "Please, type 1, 2, or 3 as your "
+                        std::cout << "\nPlease, type 1, 2, or 3 as your "
                                   << "response.\n";
+                        std::cout << "\n\nRemove (1 - 3): ";
                         std::cin.clear();
                         std::cin.ignore(100, '\n');
                     }
                     else if (play_move < 1) // else
                     {
-                        std::cout << "Must remove at least one match.\n";
+                        std::cout << "\nMust remove at least one match.\n";
+                        std::cout << "\n\nRemove (1 - 3): ";
                         std::cin.clear();
                         std::cin.ignore(100, '\n');
                     }
                     else if (play_move > 3) // else
                     {
-                        std::cout << "Cannot remove more than three "
-                                  << "matches.";
+                        std::cout << "\nCannot remove more than three "
+                                  << "matches.\n";
+                        std::cout << "\n\nRemove (1 - 3): ";
                         std::cin.clear();
                         std::cin.ignore(100, '\n');
                     }
@@ -506,12 +548,13 @@ int main()
         } while (matches > 0); // end of while loop
 
         std::cout << "Would you like to play again? (Y/N): ";
-        play_again = ' ';
+        std::cin >> play_again;
+        play_again = toupper(play_again);
         while (play_again != 'Y' && play_again != 'N') // while loop
         {
             if (play_again != 'Y' && play_again != 'N') // if statement
             {
-                std::cout << "Please, answer Y or N.\n";
+                std::cout << "\nPlease, answer Y or N.\n\n";
                 std::cin.clear();
                 std::cin.ignore(100, '\n');
             }
