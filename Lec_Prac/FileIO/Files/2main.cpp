@@ -45,7 +45,7 @@ int main()
 
             studentCount++;
         }
-        std::cout << "Number of students: " << studentCount << std::endl;
+        std::cout << "Number of students: " << studentCount << "\tClass Average:" << scoreTotal/studentCount << std::endl;
 
         first_line = false;
     }
