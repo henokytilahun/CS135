@@ -25,6 +25,8 @@ int main()
 
     int studentCount = 0;
     double scoreTotal = 0;
+    double highScore = -1;
+    double lowScore = 101;
     while(!reader.eof())
     {
         getline(reader, line);
@@ -38,6 +40,14 @@ int main()
             std::getline(ss, scoreStr, ',');
             std::getline(ss, letterGrade, ',');
             scoreTotal += stod(scoreStr);
+            if(stod(scoreStr) > highScore)
+            {
+                highScore = stod(scoreStr);
+            }
+            if(stod(scoreStr) < lowScore)
+            {
+                lowScore = stod(scoreStr);
+            }
             /*
                 double score = s
             */
@@ -45,7 +55,7 @@ int main()
 
             studentCount++;
         }
-        std::cout << "Number of students: " << studentCount << "\tClass Average:" << scoreTotal/studentCount << std::endl;
+        std::cout << "Number of students: " << studentCount << "\tClass Average:" << scoreTotal/studentCount << "\n Highest score = " << highScore << "\tLowest Score: " << lowScore << std::endl;
 
         first_line = false;
     }
