@@ -27,6 +27,8 @@ int main()
     double scoreTotal = 0;
     double highScore = -1;
     double lowScore = 101;
+
+    std::string highStudent = "", lowStudent = "";
     while(!reader.eof())
     {
         getline(reader, line);
@@ -43,10 +45,12 @@ int main()
             if(stod(scoreStr) > highScore)
             {
                 highScore = stod(scoreStr);
+                highStudent = name;
             }
             if(stod(scoreStr) < lowScore)
             {
                 lowScore = stod(scoreStr);
+                lowStudent = name;
             }
             /*
                 double score = s
@@ -55,7 +59,7 @@ int main()
 
             studentCount++;
         }
-        std::cout << "Number of students: " << studentCount << "\tClass Average:" << scoreTotal/studentCount << "\n Highest score = " << highScore << "\tLowest Score: " << lowScore << std::endl;
+        std::cout << "Number of students: " << studentCount << "\tClass Average:" << scoreTotal/studentCount << "\n Highest score = " << highScore << "\tStudent: " << highStudent << "\tLowest Score: " << lowScore << "\tStudent: "<< lowStudent << std::endl;
 
         first_line = false;
     }
