@@ -8,7 +8,8 @@ int main()
     std::ifstream reader;
     std::string names[50];
     int index = 0;
-
+    double scores[50];
+    std::string lettergrades[50];
     do
     {
         std::cout << "Enter a filename\n";
@@ -45,6 +46,8 @@ int main()
             std::getline(ss, letterGrade, ',');
 
             names[index] = name;
+            scores[index] = stod(scoreStr);
+            lettergrades[index] = letterGrade;
             index++;
 
             scoreTotal += stod(scoreStr);
@@ -76,7 +79,11 @@ int main()
 
     for(int i = 0; i < 50; i++)
     {
-        std::cout <<"Name: " << names[i] << std::endl;
+        if(scores[i] > scoreTotal/studentCount)
+        {
+            std::cout <<"Name: " << names[i] << "\tScores:" << scores[i] << "\tLetter Grades: " << lettergrades[i] <<std::endl;
+        }
+        //std::cout <<"Name: " << names[i] << "\tScores:" << scores[i] << "\tLetter Grades: " << lettergrades[i] <<std::endl;
     }
     return 0;
 }
