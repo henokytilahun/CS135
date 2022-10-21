@@ -6,8 +6,8 @@
 int main()
 {
     std::fstream reader;
-    std::string names[100];
-    std::string scores[100];
+    std::string s_arr[100];
+    int i_arr[100];
 
     int min = 0;
     int max = 0;
@@ -42,35 +42,33 @@ int main()
     std::cout << "\n\nEnter a name to search\n**";
     std::getline(std::cin, toFind);
 
-    int cnt = 0;
     std::string line = "";
-    while(!reader.eof())
-    {
-        reader >> names[cnt] >> scores[cnt];
-        cnt++;
-    }
-    std::cout << "Names Forward: ";
-    for(int i = 0; i <= cnt-2; i++)
-    {
-        std::cout << names[i];
-        if(!(i == cnt-2))
-        {
-            std::cout << ", ";
-        }
-    }
-    std::cout << "\n";
+    int inc = 0;
+    reader >> i_arr[inc] >> s_arr[inc];
 
-    std::cout << "Scores Forward: ";
-    for(int i = 0; i <= cnt-2; i++)
+    while (!reader.eof())
     {
-        std::cout << scores[i];
-        if(!(i == cnt-2))
-        {
-            std::cout << ", ";
-        }
+        
+        inc++;
     }
-    
 
+    std::cout << i_arr[inc] << " " << s_arr[inc] << "\n";
+    /*
+    while (!reader.eof())
+    {
+        for (int i = 0; i < inc; i++)
+        {
+            reader >> i_arr[i] >> s_arr[i];
+            std::cout << i_arr[i];
+
+            if (!(i == inc))
+            {
+                std::cout << ", ";
+            }
+        }
+        inc++;
+    }
+    */
     reader.close();
     return 0;
 }
