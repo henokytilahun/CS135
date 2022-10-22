@@ -47,6 +47,10 @@ int main()
     while(!reader.eof())
     {
         reader >> names[cnt] >> scores[cnt];
+        if(names[cnt] == toFind)
+        {
+            foundCount++;
+        }
         cnt++;
     }
     std::cout << "Names Forward: ";
@@ -92,6 +96,7 @@ int main()
         }
     }
     
+    std::cout << "\n";
     std::cout << foundCount << " results for " << toFind;
 
     reader.close();
