@@ -69,7 +69,30 @@ int main()
             std::cout << ", ";
         }
     }
+    std::cout << "\n";
+    std::cout << "Names Reverse: ";
+
+    for(int i = cnt-2; i >= 0; i--)
+    {
+        std::cout << names[i];
+        if(!(i == 0))
+        {
+            std::cout << ", ";
+        }
+    }
+
+    std::cout << "\n";
+    std::cout << "Scores Reverse: ";
+    for(int i = cnt-2; i >= 0; i--)
+    {
+        std::cout << scores[i];
+        if(!(i == 0))
+        {
+            std::cout << ", ";
+        }
+    }
     
+    std::cout << foundCount << " results for " << toFind;
 
     reader.close();
     return 0;
