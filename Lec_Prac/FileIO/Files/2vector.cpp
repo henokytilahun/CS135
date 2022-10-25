@@ -17,5 +17,15 @@ int main ()
         }
     }
 
+    int index = -1;
+    for(int i = 0; i < str.length(); i++)
+    {
+        if(search == str[i])
+        {
+            index = i; //saves last occurance of letter
+            break;
+        }
+    }
+
     return 0;
 }
