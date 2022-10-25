@@ -48,5 +48,16 @@ int main()
     //conditions: You have to read the entire thing
     //Conditions: You cann't (by default) keep track of the index
     //Conditions: You can only use for reading
+
+
+
+    //declaring vector with inital size and a default value: has slots, has data
+    //syntax: vetor<dataType> vectorName (size, default_value);
+    std::vector<int> v3 (10, -1);
+
+    //creating a vector with values
+    //syntax: vector<dataType> vectorName = {val1, val2, val3....};
+    std::vector<int> v4 = {1,2,3,4,5}; // Note: You may need to complie using c++ 11 or higher
+
     return 0;
 }
