@@ -8,6 +8,8 @@ int main()
     std::ifstream reader;
     int r = 7, c = 10;
     double arr[r][c];
+    double row[c];
+    double rowSum = 0.0, colSum = 0.0;
     std::cout << "Enter file name\n**";
     do
     {
@@ -28,10 +30,13 @@ int main()
 
     for(int i = 0; i < r; i++)
     {
+        rowSum = 0.0;
         for(int j = 0; j < c; j++)
         {
             reader >> arr[i][j];
+            rowSum += arr[i][j];
         }
+        row[i] = rowSum;
     }
 
     reader.close();
@@ -42,7 +47,7 @@ int main()
         {
             std::cout << arr[i][j] << " ";
         }
-        std::cout << "\n";
+        std::cout << "= " << row[i] << "\n";
     }
 
 
