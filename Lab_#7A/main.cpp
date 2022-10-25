@@ -30,16 +30,13 @@ int main()
 
     for(int i = 0; i < r; i++)
     {
-        colSum = 0.0;
         rowSum = 0.0;
         for(int j = 0; j < c; j++)
         {
             reader >> arr[i][j];
             rowSum += arr[i][j];
-            colSum += arr[j][i];
         }
         row[i] = rowSum;
-        col[i] = colSum;
     }
 
     reader.close();
@@ -54,6 +51,18 @@ int main()
     }
 
     std::cout << "\n\n";
+
+    for(int i =0; i < c; i++)
+    {
+        colSum = 0.0;
+        for(int j = 0; j < r; j++)
+        {
+            colSum += arr[j][i];
+        }
+        col[i] = colSum;
+    }
+
+
 
     for(int i = 0; i < c; i++)
     {
