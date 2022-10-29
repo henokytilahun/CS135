@@ -1,22 +1,36 @@
+/*
+  Name: Henok Tilahun, 5007740928, 1021, Lab 6b
+  Description: Takes user input for file name and the reads the file.
+  It checks if file is opened or not and decides a course of action.
+  Puts file into 5 different arrays. It creates a database of each value.
+  Checks to see if cars speed went above certian limits based on
+  weight and speed.
+  Input: String
+  Output: Creates files
+*/
 #include <iostream>
 #include <fstream>
 #include <sstream>
-
+/*
+  FUNCTION_IDENTIFIER: Lets the Operating System run this program.
+  parameters: N/A
+  return value: returns 0
+*/
 int main()
 {
     // initalize variabkles and arrays
-    std::string plate[1200];
-    std::string date[1200];
-    std::string time[1200];
-    std::string weight[1200];
-    std::string speed[1200];
-    std::string file_name = "";
-    std::ifstream reader;
+    std::string plate[1200];    // array
+    std::string date[1200];     // array
+    std::string time[1200];     // array
+    std::string weight[1200];   // array
+    std::string speed[1200];    // array
+    std::string file_name = ""; // initalizes string
+    std::ifstream reader;       // creates input
+    std::ofstream writer;       // creates output
+    int vio = 0;
 
-    int arr_size = sizeof(plate) / sizeof(plate[0]);
-
-    std::cout << "Open File: ";
-    do
+    std::cout << "Open File: "; // asks user for file name
+    do                          // checks if valid file exists
     {
         getline(std::cin, file_name);
         reader.open(file_name.c_str());
@@ -33,22 +47,109 @@ int main()
         }
     } while (!reader);
 
-    int i = 0;
+    int index = 0; // increimenter for reading file
     std::string line = "";
-    while (!reader.eof())
+    while (!reader.eof()) // executes as long as file has not ended
     {
         getline(reader, line);
         std::stringstream ss(line);
+        getline(ss, plate[index], ',');
+        getline(ss, date[index], ',');
+        getline(ss, time[index], ',');
+        getline(ss, weight[index], ',');
+        getline(ss, speed[index], ',');
+        index++;
+    }
+    reader.close();
 
-        getline(ss, plate[i], ',');
-        getline(ss, date[i], ',');
-        getline(ss, time[i], ',');
-        getline(ss, weight[i], ',');
-        getline(ss, speed[i], ',');
-        std::cout << speed[i] << '\n';
-        i++;
+    for (int i = 0; i < index; i++) // starts for loop
+    {
+        if (std::stoi(weight[i]) < 5000 && std::stoi(speed[i]) > 45)
+        {
+            writer << "[" << time[i] << "] " << plate[i] << "\n";
+            vio++;
+        }
+        else if (std::stoi(weight[i]) > 5000 && std::stoi(speed[i]) > 30)
+        {
+            writer << "[" << time[i] << "] " << plate[i] << "\n";
+            vio++;
+        }
     }
 
-    reader.close();
+    std::string report = date[0]; // sets report to the date of 1st index
+    int repDate = 0;              // gonna contain index for date value
+
+    while (report == date[repDate]) // runs as long as indx matches
+    {
+        writer.open("[" + report + "]" + " Report.txt");
+        for (int i = 0; i < index; i++) // starts for loop
+        {
+            if (date[i] == "10-09-2022")
+            {
+                if (std::stoi(weight[i]) < 5000 && std::stoi(speed[i]) > 45)
+                {
+                    writer << "[" << time[i] << "] " << plate[i] << "\n";
+                }
+                else if (std::stoi(weight[i]) > 5000 && std::stoi(speed[i]) > 30)
+                {
+                    writer << "[" << time[i] << "] " << plate[i] << "\n";
+                }
+            }
+        }
+        repDate++; // updates index
+    }
+
+    if (!(report == date[repDate]) && (repDate != index))
+    {
+        writer.close();
+        report = date[repDate];
+        while (report == date[repDate]) // runs as long as indx matches
+        {
+            writer.open("[" + report + "]" + " Report.txt");
+            for (int i = repDate; i < index; i++) // starts for loop
+            {
+                if (date[i] == "10-10-2022")
+                {
+                    if (std::stoi(weight[i]) < 5000 && std::stoi(speed[i]) > 45)
+                    {
+                        writer << "[" << time[i] << "] " << plate[i] << "\n";
+                    }
+                    else if (std::stoi(weight[i]) > 5000 && std::stoi(speed[i]) > 30)
+                    {
+                        writer << "[" << time[i] << "] " << plate[i] << "\n";
+                    }
+                }
+            }
+            repDate++; // updates index
+        }
+    }
+
+    if (!(report == date[repDate]) && (repDate != index))
+    {
+        writer.close();
+        report = date[repDate];
+        while (report == date[repDate]) // runs as long as indx matches
+        {
+            writer.open("[" + report + "]" + " Report.txt");
+            for (int i = repDate; i < index; i++) // starts for loop
+            {
+                if (date[i] == "10-11-2022")
+                {
+                    if (std::stoi(weight[i]) < 5000 && std::stoi(speed[i]) > 45)
+                    {
+                        writer << "[" << time[i] << "] " << plate[i] << "\n";
+                    }
+                    else if (std::stoi(weight[i]) > 5000 && std::stoi(speed[i]) > 30)
+                    {
+                        writer << "[" << time[i] << "] " << plate[i] << "\n";
+                    }
+                }
+            }
+            repDate++; // updates index
+        }
+    }
+
+    std::cout << vio << " violations logged.\n";
+    writer.close();
     return 0;
 }
