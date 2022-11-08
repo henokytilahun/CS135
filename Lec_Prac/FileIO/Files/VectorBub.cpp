@@ -1,7 +1,7 @@
 #include <iostream>
 #include <vector>
 
-void updateVector(std::vector<int> v);
+void updateVector(std::vector<int> &v);
 void printVector(std::vector<int> v);
 
 int main ()
@@ -13,7 +13,7 @@ int main ()
     return 0;
 }
 
-void updateVector(std::vector<int> v)
+void updateVector(std::vector<int> &v)
 {
     for(int i = 0; i < v.size(); i++)
     {
