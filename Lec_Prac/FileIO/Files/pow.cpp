@@ -18,7 +18,8 @@ int main()
     return 0;
 }
 
-void printArray(int a[], int size, int startFrom) //notice how there isn't a default value here
+void printArray(int a[], int size, int startFrom) //notice how there isn't a default value here 
+//when prototype is used
 {
     for(int i = startFrom; i < size; i++)
     {
