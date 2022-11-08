@@ -1,7 +1,8 @@
 #include <iostream>
 #include <vector>
+#include <cmath>
 
-using std::cout, std::string, std::endl, std::vector;
+using std::cout, std::string, std::endl, std::vector, std::min, std::max;
 
 void stats(int a, int b, int c, int d, int &min, int &max, double &avg);
 
@@ -12,29 +13,12 @@ int main()
     return 0;
 }
 
-void stats(int a, int b, int c, int d, int &min, int &max, double &avg)
+void stats(int a, int b, int c, int d, int &mini, int &maxi, double &avg)
 {
-    if(a < b && a < c)
-    {
-        min = a;
-    } else if (b < a && b < c)
-    {
-        min = b
-    } else
-    {
-        min = c;
-    }
+    mini = min(a, min(b,c));
+    maxi = max(a, max(b,c));
 
-    if(a > b && a > c)
-    {
-        max = a;
-    } else if (b > a && b > c)
-    {
-        max = b
-    } else
-    {
-        max = c;
-    }gggggggggggggf
+    avg = double(a+b+c)/3;
 
     
 }
