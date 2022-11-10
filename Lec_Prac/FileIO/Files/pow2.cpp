@@ -11,8 +11,8 @@ void callCounter()
 
 int main()
 {
-    callCounter();
-    callCounter();
+    callCounter(); //runs both lines in callCounter, keeps the variable alive
+    callCounter(); //runs second lines only
     callCounter();
     callCounter();
     callCounter();
