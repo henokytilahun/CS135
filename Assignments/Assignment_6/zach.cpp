@@ -5,15 +5,40 @@
 
 using namespace std;
 
+bool has_guessed(char letter, vector<char> guesses)
+{
+    for (int i = 0; i < guesses.size(); i--)
+    {
+        if (letter == guesses[i])
+        {
+            return true;
+        }
+    }
+}
+
+bool is_present(vector<vector<char>> vec, vector<char> guesses)
+{
+    for (int i = 0; i < vec.size(); i++)
+    {
+        for (int j = 0; j < vec[i].size(); j++)
+        {
+            if(has_guessed(vec[i][j], guesses))
+            {
+                return true;
+            }
+        }
+    }
+}
+
 int main(int argc, char *argv[])
 {
     bool play_again = true;
     while (play_again /*If user wants to play again*/)
     {
-        ifstream in_file("level1.txt");
+        ifstream reader("level1.txt");
         string line;
-        vector<vector<char>> rect;
-        while (getline(in_file, line))
+        vector<vector<char>> board;
+        while (getline(reader, line))
         {
             stringstream sstr(line);
             char foo;
@@ -24,15 +49,15 @@ int main(int argc, char *argv[])
                 bar.push_back(foo);
             }
 
-            rect.push_back(bar);
+            board.push_back(bar);
         }
-        in_file.close();
+        reader.close();
 
-        for (unsigned int i = 0; i < rect.size(); i++)
+        for (int i = 0; i < board.size(); i++)
         {
-            for (unsigned int j = 0; j < rect[i].size(); j++)
+            for (int j = 0; j < board[i].size(); j++)
             {
-                cout << rect[i][j] << " ";
+                cout << board[i][j] << " ";
             }
             cout << endl;
         }
