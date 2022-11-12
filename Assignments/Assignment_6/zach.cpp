@@ -7,16 +7,17 @@ using namespace std;
 
 int main(int argc, char *argv[])
 {
-    vector<vector<char>> rect;
-    while (true)
+    bool play_again = true;
+    while (play_again /*If user wants to play again*/)
     {
         ifstream in_file("level1.txt");
         string line;
+        vector<vector<char>> rect;
         while (getline(in_file, line))
         {
             stringstream sstr(line);
-            int foo;
-            vector<char> bar;
+            char foo;
+            vector<char> bar; // variable scope allows it to reset
 
             while (sstr >> foo)
             {
@@ -26,15 +27,17 @@ int main(int argc, char *argv[])
             rect.push_back(bar);
         }
         in_file.close();
-    }
 
-
-    for (unsigned int i = 0; i < rect.size(); i++)
-    {
-        for (unsigned int j = 0; j < rect[i].size(); j++)
+        for (unsigned int i = 0; i < rect.size(); i++)
         {
-            cout << rect[i][j] << endl;
+            for (unsigned int j = 0; j < rect[i].size(); j++)
+            {
+                cout << rect[i][j] << " ";
+            }
+            cout << endl;
         }
+
+        play_again = false;
     }
 
     return 0;
