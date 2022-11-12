@@ -14,13 +14,13 @@ using std::cout;
 using std::cin;
 using std::endl;
 // define user-functions
-int getInput(string prompt, int x);
+int getIntInput(string prompt);
 bool checkInput(int input);
-string getInput(string prompt);
+string getStringInput(string prompt);
 int add(int num1, int num2);
-string add(string str1, string str2);
+string s_add(string str1, string str2);
 int multiply(int num1, int num2);
-string multiply(string str, int num);
+string s_multiply(string str, int num);
 /*
   FUNCTION_IDENTIFIER: Lets the Operating System run this program.
   parameters: N/A
@@ -33,7 +33,7 @@ int main()
     string prompt3 = "Enter a string\n**";
     string prompt4 = "Enter another string\n**";
 
-    int int1 = getInput(prompt1, 0);
+    int int1 = getIntInput(prompt1);
     while(checkInput(int1) == false)
     {
         if(cin.fail() || int1 > 50 || int1 < 1)
@@ -41,12 +41,12 @@ int main()
             cout << "\nError: Invalid Input!\n";
             cin.clear();
             cin.ignore(100, '\n');
-            int1 = getInput(prompt1,0);
+            int1 = getIntInput(prompt1);
             checkInput(int1);
         }
     }
     cout << "\n";
-    int int2 = getInput(prompt2,0);
+    int int2 = getIntInput(prompt2);
     while(checkInput(int2) == false)
     {
         if(cin.fail() || int2 > 50 || int2 < 1)
@@ -54,20 +54,20 @@ int main()
             cout << "\nError: Invalid Input!\n";
             cin.clear();
             cin.ignore(100, '\n');
-            int2 = getInput(prompt2,0);
+            int2 = getIntInput(prompt2);
             checkInput(int2);
         }
     }
     cout << "\n";
-    string str1 = getInput(prompt3);
+    string str1 = getStringInput(prompt3);
     cout << "\n";
-    string str2 = getInput(prompt4);
+    string str2 = getStringInput(prompt4);
 
     int addi = add(int1, int2);
-    string str_addi = add(str1, str2);
+    string str_addi = s_add(str1, str2);
     int multi = multiply(int1, int2);
-    string mul_str1 = multiply(str1, int1);
-    string mul_str2 = multiply(str2, int2);
+    string mul_str1 = s_multiply(str1, int1);
+    string mul_str2 = s_multiply(str2, int2);
 
     cout << "\n";
     cout << int1 << " + " << int2 << " = " << addi << "\n";
@@ -83,9 +83,9 @@ int main()
   parameters: string
   return value: returns int
 */
-int getInput(string prompt, int x)
+int getIntInput(string prompt)
 {
-    int input = x;
+    int input = 0;
     cout << prompt;
     cin >> input;
     return input;
@@ -109,7 +109,7 @@ bool checkInput(int input)
   parameters: string
   return value: returns string
 */
-string getInput(string prompt)
+string getStringInput(string prompt)
 {
     string str = "";
     cout << prompt;
@@ -132,7 +132,7 @@ int add(int num1, int num2)
   parameters: strings
   return value: returns string
 */
-string add(string str1, string str2)
+string s_add(string str1, string str2)
 {
     string str = str1 + str2;
     return str;
@@ -152,7 +152,7 @@ int multiply(int num1, int num2)
   parameters: string and int
   return value: returns string
 */
-string multiply(string str, int num)
+string s_multiply(string str, int num)
 {
     string newStr = "";
     for(int i = 0; i < num; i++)
