@@ -14,53 +14,88 @@ void displayCrossword();
 
 int getLevelInput(string prompt);
 
+char getCharInput(string prompt);
+
+void guesses(vector<char> guesses);
+
+void print(vector<vector<char>> board, vector<char> guesses);
+
 bool checkInput(int input);
 
 int main()
 {
-
-    std::ifstream reader;
-    string prompt1 = "Enter level to play:\n";
-
-    int level = getLevelInput(prompt1);
-
-    while (checkInput(level) == false)
+    bool play_again = false;
+    do
     {
-        if (cin.fail() || level < 1)
-        {
-            cout << "\nError: Invalid Input!\n";
-            cin.clear();
-            cin.ignore(100, '\n');
-            level = getLevelInput(prompt1);
-            checkInput(level);
-        }
-    }
+        std::ifstream reader;
+        string prompt1 = "Enter level to play:\n";
 
-    reader.open("level" + std::to_string(level) + ".txt");
+        int level = getLevelInput(prompt1);
 
-    while (!reader)
-    {
-        if (!reader)
+        while (checkInput(level) == false)
         {
-            cout << "Level files could not be found!\n";
-            cin.clear();
-            cin.ignore(100, '\n');
-            level = getLevelInput(prompt1);
-            checkInput(level);
-            while (checkInput(level) == false)
+            if (cin.fail() || level < 1)
             {
-                if (cin.fail() || level < 1)
-                {
-                    cout << "\nError: Invalid Input!\n";
-                    cin.clear();
-                    cin.ignore(100, '\n');
-                    level = getLevelInput(prompt1);
-                    checkInput(level);
-                }
+                cout << "\nError: Invalid Input!\n";
+                cin.clear();
+                cin.ignore(100, '\n');
+                level = getLevelInput(prompt1);
+                checkInput(level);
             }
-            reader.open("level" + std::to_string(level) + ".txt");
         }
-    }
+
+        reader.open("level" + std::to_string(level) + ".txt");
+
+        while (!reader)
+        {
+            if (!reader)
+            {
+                cout << "Level files could not be found!\n";
+                cin.clear();
+                cin.ignore(100, '\n');
+                level = getLevelInput(prompt1);
+                checkInput(level);
+                while (checkInput(level) == false)
+                {
+                    if (cin.fail() || level < 1)
+                    {
+                        cout << "\nError: Invalid Input!\n";
+                        cin.clear();
+                        cin.ignore(100, '\n');
+                        level = getLevelInput(prompt1);
+                        checkInput(level);
+                    }
+                }
+                reader.open("level" + std::to_string(level) + ".txt");
+            }
+        }
+
+        vector<vector<char>> board;
+        string line = "";
+        while (getline(reader, line))
+        {
+            std::stringstream ss(line);
+            char element;
+            vector<char> bar; // variable scope allows it to reset
+
+            while (ss >> element)
+            {
+                bar.push_back(element);
+            }
+            board.push_back(bar);
+        }
+        reader.close();
+
+        for(int i = 0; i < board.size(); i++)
+        {
+            for(int j = 0; j < board[i].size(); j++)
+            {
+                cout << board[i][j] << " ";
+            }
+            cout << endl;
+        }
+
+    } while (play_again);
 
     return 0;
 }
@@ -90,4 +125,9 @@ bool checkInput(int input)
         return false;
     }
     return true;
+}
+
+void print(vector<vector<char>> board, vector<char> guesses)
+{
+    
 }
