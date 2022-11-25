@@ -1,47 +1,42 @@
-/*
-  Name: Henok Tilahun, 5007740928, 1021, A6
-  Description: Gets input from user using user-defined functions.
-  Check for failure using user defined funcitions. Displays a 
-  cross_word puzzel as an interactive game. Gives user
-  5 incorrect tries. Loops as to give the user an opportunity
-  to play again
-  Input: Ints, strings, and chars
-  Output: chars, bools, ints, and void
-*/
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <algorithm>
 #include <vector>
-// define standard namespace
+
 using std::cin;
 using std::cout;
 using std::endl;
 using std::string;
 using std::vector;
-// define user-functions
-void displayCrossword();// define user-functions
-int getLevelInput(string prompt);// define user-functions
-char getCharInput(string prompt);// define user-functions
-bool guessed(vector<char> guesses, char search);// define user-functions
-char check(vector<char> guesses, char search);// define user-functions
+
+void displayCrossword();
+
+int getLevelInput(string prompt);
+
+char getCharInput(string prompt);
+
+bool guessed(vector<char> guesses, char search);
+
+char check(vector<char> guesses, char search);
+
 bool correct(vector<vector<char>> board, char letter);
-void print(vector<vector<char>> board,vector<char>guesses,int&counter);
-bool checkInput(int input);// define user-functions
-bool player_won(int counter); // define user-functions
-// end of define user-functions
-/*
-  FUNCTION_IDENTIFIER: Lets the Operating System run this program.
-  parameters: N/A
-  return value: returns 0
-*/
+
+void print(vector<vector<char>> board, vector<char> guesses, int &counter);
+
+bool checkInput(int input);
+
+bool player_won(int counter); //addition
+
 int main()
 {
     char decision = 'A';
-    displayCrossword();
     do
     {
         std::ifstream reader;
         string prompt1 = "Enter level to play:\n";
+
+        displayCrossword();
 
         int level = getLevelInput(prompt1);
 
@@ -49,7 +44,7 @@ int main()
         {
             if (cin.fail() || level < 1)
             {
-                cout << "Invalid Entry!\n";
+                cout << "\nError: Invalid Input!\n";
                 cin.clear();
                 cin.ignore(100, '\n');
                 level = getLevelInput(prompt1);
@@ -63,7 +58,7 @@ int main()
         {
             if (!reader)
             {
-                cout << "Level files could not be found!\n";
+                cout << "\nLevel files could not be found!\n";
                 cin.clear();
                 cin.ignore(100, '\n');
                 level = getLevelInput(prompt1);
@@ -72,7 +67,7 @@ int main()
                 {
                     if (cin.fail() || level < 1)
                     {
-                        cout << "Invalid Entry!\n";
+                        cout << "\nError: Invalid Input!\n";
                         cin.clear();
                         cin.ignore(100, '\n');
                         level = getLevelInput(prompt1);
@@ -89,7 +84,7 @@ int main()
         while (getline(reader, line))
         {
             std::stringstream ss(line);
-            char element = 'B';
+            char element;
             vector<char> bar; // variable scope allows it to reset
 
             while (ss >> element)
@@ -105,39 +100,46 @@ int main()
         vector<char> guess;
         print(board, guess, counter);
         string prompt2 = "\nEnter a letter:\n";
-        bool has_guessed = false;
+        bool has_guessed;
         while (guesses > 0)
         {
-            char l = getCharInput(prompt2);
-            l = toupper(l);
-            has_guessed = guessed(guess, l);
+            char letter = getCharInput(prompt2);
+            letter = toupper(letter);
+            has_guessed = guessed(guess, letter);
             if (has_guessed == false)
             {
-                guess.push_back(l);
-                if (correct(board, l) == false)
+                guess.push_back(letter);
+                if (correct(board, letter) == false)
                 {
-                    cout << "the letter is not on the board\n";
                     guesses--;
                 }
-                cout << "Remaining incorrect guesses: " << guesses 
-                << endl << endl;
+                cout << "Remaining incorrect guesses: " << guesses << endl << endl;
             }
             else
             {
-        
-                if(correct(board,l)==false&&check(guess,l)==false)
+                while (has_guessed == true)
                 {
-                    guesses--;
+                    if (correct(board, letter) == false)
+                    {
+                        guesses--;
+                    }
+                    cout << "The letter is already guessed, try again!\n";
+                    cout << "Remaining incorrect guesses: " << guesses << endl;
+                    letter = getCharInput(prompt2);
+                    letter = toupper(letter);
+                    has_guessed = guessed(guess, letter);
+                    if (has_guessed == false)
+                    {
+                        guess.push_back(letter);
+                        break;
+                    }
                 }
-                cout<<"The letter is already guessed, try again!\n";
-                cout << "Remaining incorrect guesses: " << guesses 
-                << endl << endl;        
             }
             print(board, guess, counter);
 
             if(guesses == 0)
             {
-                cout << "\nBetter luck next time!\n";
+                cout << "Better luck next time!\n";
             }
             if(counter == 0)
             {
@@ -147,7 +149,7 @@ int main()
 
         if(counter == 0)
         {
-            cout << "\nCongratulations! you solved the level!\n";
+            cout << "Congratulations! you solved the level!\n";
         }
         string prompt3 = "Play again? (y/n)\n";
         cout << prompt3;
@@ -157,7 +159,7 @@ int main()
         {
             if (decision != 'Y' && decision != 'N') // if statement
             {
-                cout << "Invalid entry!\n" << prompt3;
+                cout << "Invalid Input.\n" << prompt3;
                 cin.clear();
                 cin.ignore(100, '\n');
             }
@@ -167,15 +169,11 @@ int main()
 
     } while (decision == 'Y');
 
-    cout << "Thank you for playing CrossWord!\n";
+    cout << "Thank you for playing CrossWord!";
 
     return 0;
 }
-/*
-  FUNCTION_IDENTIFIER: Displays crossword sign.
-  parameters: N/A
-  return value: N/A
-*/
+
 void displayCrossword()
 {
     cout << endl
@@ -185,12 +183,7 @@ void displayCrossword()
          << "         R\n"
          << "         D\n\n";
 }
-// initalize user-functions
-/*
-  FUNCTION_IDENTIFIER: Get's user input.
-  parameters: string
-  return value: returns int
-*/
+
 int getLevelInput(string prompt)
 {
     int input = 0;
@@ -198,11 +191,7 @@ int getLevelInput(string prompt)
     cin >> input;
     return input;
 }
-/*
-  FUNCTION_IDENTIFIER: Checks if input is not int or below 1
-  parameters: int
-  return value: returns boolean
-*/
+
 bool checkInput(int input)
 {
     if (cin.fail() || input < 1)
@@ -211,19 +200,15 @@ bool checkInput(int input)
     }
     return true;
 }
-/*
-  FUNCTION_IDENTIFIER: Displays crossword board.
-  parameters: 2-d vector, vector for all guessed characters
-  return value: N/A
-*/
-void print(vector<vector<char>> board,vector<char>guesses,int&counter)
+
+void print(vector<vector<char>> board, vector<char> guesses, int &counter)
 {
     counter = 0; //addition
-    for (unsigned int i = 0; i < board.size(); i++)
+    for (int i = 0; i < board.size(); i++)
     {
-        for (unsigned int j = 0; j < board[i].size(); j++)
+        for (int j = 0; j < board[i].size(); j++)
         {
-            if(board[i][j]=='#'||check(guesses,board[i][j])==board[i][j])
+            if (board[i][j] == '#' || check(guesses, board[i][j]) == board[i][j])
             {
                 cout << board[i][j];
             }
@@ -241,27 +226,18 @@ void print(vector<vector<char>> board,vector<char>guesses,int&counter)
         cout << endl;
     }
 }
-/*
-  FUNCTION_IDENTIFIER: Get's user input.
-  parameters: string
-  return value: returns char
-*/
+
 char getCharInput(string prompt)
 {
-    string input = "";
+    char input = ' ';
     cout << prompt;
     cin >> input;
-    char nInput = input[0];
-    return nInput;
+    return input;
 }
-/*
-  FUNCTION_IDENTIFIER: returns character if matches search.
-  parameters: vector, character
-  return value: returns char
-*/
+
 char check(vector<char> guesses, char search)
 {
-    for (unsigned int i = 0; i < guesses.size(); i++)
+    for (int i = 0; i < guesses.size(); i++)
     {
         if (search == guesses[i])
         {
@@ -270,14 +246,10 @@ char check(vector<char> guesses, char search)
     }
     return -1;
 }
-/*
-  FUNCTION_IDENTIFIER: See if letter is already guessed.
-  parameters: vector, character
-  return value: returns int
-*/
+
 bool guessed(vector<char> guesses, char search)
 {
-    for (unsigned int i = 0; i < guesses.size(); i++)
+    for (int i = 0; i < guesses.size(); i++)
     {
         if (search == guesses[i])
         {
@@ -286,16 +258,12 @@ bool guessed(vector<char> guesses, char search)
     }
     return false;
 }
-/*
-  FUNCTION_IDENTIFIER: sees if guessed letter is correct.
-  parameters: 2-d vector, char
-  return value: returns bool
-*/
+
 bool correct(vector<vector<char>> board, char letter)
 {
-    for (unsigned int i = 0; i < board.size(); i++)
+    for (int i = 0; i < board.size(); i++)
     {
-        for (unsigned int j = 0; j < board[i].size(); j++)
+        for (int j = 0; j < board[i].size(); j++)
         {
             if (letter == board[i][j])
             {
@@ -305,11 +273,7 @@ bool correct(vector<vector<char>> board, char letter)
     }
     return false;
 }
-/*
-  FUNCTION_IDENTIFIER: Checkts to see if player won before 5 inc guesses
-  parameters: int
-  return value: returns bool
-*/
+
 bool player_won(int counter) //addition
 {
     if(counter <= 0)
