@@ -226,7 +226,7 @@ string validateArguments(vector<string> args)
 			cout << QUIT_ARG_CNT_MSG << "\n";
 		} else
 		{
-			val = QUIT_CMD; 
+			val = QUIT_CMD;
 		}
 	} else if(args[0] == CREATE_CMD)
 	{
@@ -234,8 +234,9 @@ string validateArguments(vector<string> args)
 		{
 			cout << CREATE_ARG_CNT_MSG << "\n";
 		} else
-		{		
-			for(char a : args[1])
+		{
+			string t = args[1];			
+			for(char a : t)
 			{
 				if(isalnum(a) == false && (a != '_' && a != '-'))
 				{
@@ -243,17 +244,17 @@ string validateArguments(vector<string> args)
 					break;
 				}
 			}
-			reader.open(TABLE_FILE_DIRECTORY + args[1] + TABLE_FILETYPE);
+			string filename = TABLE_FILE_DIRECTORY + t + TABLE_FILETYPE;
+			reader.open(filename.c_str());
 			if(!reader.is_open())
 			{
 				for(int i = 0; i < args[2].size(); i++)
 				{
-					if(args[2][0] == ',' && args[2][args[2].size()-1] == ',')
+					if(args[2][0] == ',' || args[2][args[2].size()-1] == ',')
 					{
 						cout << CREATE_INV_HEADERS_MSG << "\n";
 						break;
-					}
-					if(isalnum(args[2][i]) == false && (args[2][i] != '_' && args[2][i] != '-'))
+					} else if(isalnum(args[2][i]) == false && (args[2][i] != '_' && args[2][i] != '-'))
 					{	
 						if(args[2][i] == ',')
 						{
@@ -262,17 +263,12 @@ string validateArguments(vector<string> args)
 								cout << CREATE_INV_HEADERS_MSG << "\n";
 								break;
 							}
-						} else
-						{
-							cout << CREATE_INV_HEADERS_MSG << "\n";
-							break;
 						}
 					}
 				}
 			} else
 			{	
 				cout << CREATE_EXISTS_MSG << "\n";
-				reader.close();
 			}
 		}
 	} else
