@@ -293,7 +293,26 @@ string validateArguments(vector<string> args)
 			val = "e";
 		}
 	}
-	else
+	else if(args[0] == DELETE_CMD)
+	{
+		if(args.size() != 2)
+		{
+			cout << DELETE_ARG_CNT_MSG << endl;
+			val = "e";
+		} else if (args[1] == SHOW_ARG_1)
+		{
+			cout << DELETE_UNDELETABLE_MSG << endl;
+			val = "e";
+		} else
+		{
+			reader.open(TABLE_FILE_DIRECTORY + args[1] + TABLE_FILETYPE);
+			if(!reader.is_open())
+			{
+				cout << DELETE_INV_TABLE_NAME_MSG << endl;
+				val = "e";
+			}
+		}
+	} else
 	{
 		cout << INV_CMD_MSG << "\n";
 		val = "e";
