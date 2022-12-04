@@ -4,6 +4,7 @@
 #include <vector>
 #include <stdio.h>
 #include <algorithm>
+#include <sstream>
 
 using namespace std;
 
@@ -52,7 +53,10 @@ void getCredentials(int, char const *[], string&, string&);
 bool validateCredentials(string, string);
 // sections 2/3 add function prototypes
 // YOUR CODE HERE
-
+void commandLoop();
+vector <string> getInput();
+string validateArguments(vector<string> args);
+void executeCommand(vector<string> args);
 
 
 int main(int argc, char const *argv[]) {
@@ -66,11 +70,9 @@ int main(int argc, char const *argv[]) {
 		cout << " " << USER << "\n";
 		header();
 		
-        
-
         // 2.1 call the loop to get commands from the user
 	    // YOUR CODE HERE
-
+		commandLoop();
 
 
     }
@@ -194,22 +196,71 @@ bool validateCredentials(string u, string p) {
 
 // 2.1 add getInput() function
 // YOUR CODE HERE
-
+vector <string> getInput()
+{
+	vector <string> v;
+	cout << COMMAND_PROMPT;
+	string line = "";
+	getline(cin, line);
+	
+	string temp = "";
+    stringstream ss(line);
+    while(getline(ss, temp, ' ')) 
+	{
+		v.push_back(toLower(temp));
+	}
+	return v;
+}
 
 
 // 2.1 add validateArguments(vector<string>) function
 // YOUR CODE HERE
-
+string validateArguments(vector<string> args)
+{
+	string val = "";
+	if(args[0] == QUIT_CMD)
+	{
+		if(args.size() > 1)
+		{
+			cout << QUIT_ARG_CNT_MSG << "\n";
+			val = "e";
+		} else
+		{
+			val = QUIT_CMD;
+		}
+	} else
+	{
+		cout << INV_CMD_MSG << "\n";
+		val = "e";
+	}
+	return val;
+}
 
 
 // 2.1 add executeCommand(vector<string>) function
 // YOUR CODE HERE
-
+void executeCommand(vector<string> args)
+{
+	
+}
 
 
 // 2.1 add commandLoop() function
 // YOUR CODE HERE
-
+void commandLoop()
+{
+	string quit = "";
+	while(quit != QUIT_CMD)
+	{
+		vector <string> args = getInput();
+		string val = validateArguments(args);
+		if(val != "")
+		{
+			executeCommand(args);
+		}
+		quit = val;
+	}
+}
 
 
 /*
