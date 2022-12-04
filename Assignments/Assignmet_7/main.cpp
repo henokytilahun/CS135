@@ -233,6 +233,7 @@ string validateArguments(vector<string> args)
 		if(args.size() != 3)
 		{
 			cout << CREATE_ARG_CNT_MSG << "\n";
+			val = "e";
 		} else
 		{		
 			for(char a : args[1])
@@ -240,6 +241,7 @@ string validateArguments(vector<string> args)
 				if(isalnum(a) == false && (a != '_' && a != '-'))
 				{
 					cout << CREATE_INV_TABLE_NAME_MSG << "\n";
+					val = "e";
 					break;
 				}
 			}
@@ -251,6 +253,7 @@ string validateArguments(vector<string> args)
 					if(args[2][0] == ',' && args[2][args[2].size()-1] == ',')
 					{
 						cout << CREATE_INV_HEADERS_MSG << "\n";
+						val = "e";
 						break;
 					}
 					if(isalnum(args[2][i]) == false && (args[2][i] != '_' && args[2][i] != '-'))
@@ -260,11 +263,13 @@ string validateArguments(vector<string> args)
 							if(args[2][i] == ',' && args[2][i-1] == ',')
 							{
 								cout << CREATE_INV_HEADERS_MSG << "\n";
+								val = "e";
 								break;
 							}
 						} else
 						{
 							cout << CREATE_INV_HEADERS_MSG << "\n";
+							val = "e";
 							break;
 						}
 					}
@@ -272,12 +277,14 @@ string validateArguments(vector<string> args)
 			} else
 			{	
 				cout << CREATE_EXISTS_MSG << "\n";
+				val = "e";
 				reader.close();
 			}
 		}
 	} else
 	{
 		cout << INV_CMD_MSG << "\n";
+		val = "e";
 	}
 	return val;
 }
@@ -285,11 +292,20 @@ string validateArguments(vector<string> args)
 
 // 2.1 add executeCommand(vector<string>) function
 // YOUR CODE HERE
+ofstream writer;
 void executeCommand(vector<string> args)
 {
 	if(args[0] == QUIT_CMD)
 	{
 		exit(0);
+	} else if (args[0] == CREATE_CMD)
+	{
+		writer.open(TABLE_FILE_DIRECTORY + args[1] + TABLE_FILETYPE, ios_base::app);
+		writer << args[2];
+		cout << args[1] << TABLE_CREATE_SUCCESS_MSG << endl;
+		writer.close();
+		writer.open(TABLES_TABLE, ios_base::app);
+		writer << args[1];
 	}
 }
 
@@ -303,7 +319,7 @@ void commandLoop()
 	{
 		vector <string> args = getInput();
 		string val = validateArguments(args);
-		if(val != "")
+		if(val == "")
 		{
 			executeCommand(args);
 		}
