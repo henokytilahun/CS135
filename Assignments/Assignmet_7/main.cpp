@@ -281,7 +281,19 @@ string validateArguments(vector<string> args)
 				reader.close();
 			}
 		}
-	} else
+	} else if(args[0] == SHOW_CMD)
+	{
+		if(args.size() != 2)
+		{
+			cout << SHOW_ARG_CNT_MSG << endl;
+			val = "e";
+		} else if (args[1] != SHOW_ARG_1)
+		{
+			cout << SHOW_INV_OPT_MSG << endl;
+			val = "e";
+		}
+	}
+	else
 	{
 		cout << INV_CMD_MSG << "\n";
 		val = "e";
@@ -306,6 +318,9 @@ void executeCommand(vector<string> args)
 		writer.close();
 		writer.open(TABLES_TABLE, ios_base::app);
 		writer << args[1];
+	} else if (args[0] == SHOW_CMD)
+	{
+		printTable(TABLES_TABLE);
 	}
 }
 
